@@ -10,23 +10,15 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   packages: write
+  contents: write
 
 jobs:
   release:
     name: ✨ Release
     runs-on: ubuntu-22.04
     steps:
-      - name: Get token
-        id: get_token
-        uses: microsoftgraph/get-app-token@main
-        with:
-          application-id: ${{ vars.DS_PROJECT_GITHUB_APP_ID }}
-          application-private-key: ${{ secrets.DS_PROJECT_GITHUB_APP_PRIVATE_KEY }}
-
       - name: Checkout Repo
         uses: actions/checkout@v4
-        with:
-          token: ${{ steps.get_token.outputs.app-token }}
 
       - name: Enable Corepack
         run: corepack enable
@@ -45,7 +37,7 @@ jobs:
             //npm.pkg.github.com/:_authToken=$NPM_TOKEN
           EOF
         env:
-          NPM_TOKEN: ${{ steps.get_token.outputs.app-token }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Dependencies
         run: pnpm install
@@ -58,5 +50,5 @@ jobs:
         with:
           publish: pnpm release-packages
         env:
-          GITHUB_TOKEN: ${{ steps.get_token.outputs.app-token }}
-          NODE_AUTH_TOKEN: ${{ steps.get_token.outputs.app-token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
