@@ -8,10 +8,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:tomasfrancisco/project-ds-tokens.git"
+    "url": "git@github.com:Design-System-Project/tokens.git"
   },
   "publishConfig": {
-    "@tomasfrancisco:registry": "https://npm.pkg.github.com"
+    "@Design-System-Project:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "turbo run build",

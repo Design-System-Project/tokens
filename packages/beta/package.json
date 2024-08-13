@@ -1,13 +1,13 @@
 {
-  "name": "@tomasfrancisco/beta",
-  "version": "0.0.30",
+  "name": "@dsp-tokens/beta",
+  "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:tomasfrancisco/project-ds-tokens.git",
+    "url": "git@github.com:Design-System-Project/tokens.git",
     "directory": "packages/beta"
   },
   "publishConfig": {
-    "@tomasfrancisco:registry": "https://npm.pkg.github.com"
+    "@Design-System-Project:registry": "https://npm.pkg.github.com"
   },
   "exports": {
     "./variables.css": "./css/_variables.css"
