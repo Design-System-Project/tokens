@@ -1,5 +1,5 @@
 {
-  "name": "project-ds-tokens",
+  "name": "@design-system-project/tokens",
   "private": true,
   "workspaces": [
     "packages/alpha",
