@@ -13,8 +13,17 @@ jobs:
     name: ✨ Release
     runs-on: ubuntu-22.04
     steps:
+      - name: Get token
+        id: get_token
+        uses: microsoftgraph/get-app-token@main
+        with:
+          application-id: ${{ vars.DS_PROJECT_GITHUB_APP_ID }}
+          application-private-key: ${{ secrets.DS_PROJECT_GITHUB_APP_PRIVATE_KEY }}
+
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.get_token.outputs.app-token }}
 
       - name: Enable Corepack
         run: corepack enable
@@ -26,23 +35,6 @@ jobs:
           cache: "pnpm"
           registry-url: "https://npm.pkg.github.com"
           scope: "@Design-System-Project"
-
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          # required
-          app-id: ${{ vars.DS_PROJECT_GITHUB_APP_ID }}
-          private-key: ${{ secrets.DS_PROJECT_GITHUB_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: ${{ github.repository }}
-      - name: Get GitHub App User ID
-        id: get-user-id
-        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-      - run: |
-          git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
 
       - name: Creating .npmrc
         run: |
