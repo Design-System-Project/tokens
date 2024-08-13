@@ -1,0 +1,19 @@
+{
+  "name": "@tomasfrancisco/stable",
+  "version": "0.0.30",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tomasfrancisco/project-ds-tokens.git",
+    "directory": "packages/stable"
+  },
+  "publishConfig": {
+    "@tomasfrancisco:registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    "./variables.css": "./css/_variables.css"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
