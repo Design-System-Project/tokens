@@ -42,7 +42,7 @@ jobs:
             //npm.pkg.github.com/:_authToken=$NPM_TOKEN
           EOF
         env:
-          NPM_TOKEN: ${{ steps.app-token.outputs.token }}
+          NPM_TOKEN: ${{ steps.get_token.outputs.app-token }}
 
       - name: Install Dependencies
         run: pnpm install
@@ -55,5 +55,5 @@ jobs:
         with:
           publish: pnpm release-packages
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          NODE_AUTH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.app-token }}
+          NODE_AUTH_TOKEN: ${{ steps.get_token.outputs.app-token }}
