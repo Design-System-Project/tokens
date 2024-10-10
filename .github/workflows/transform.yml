@@ -1,0 +1,29 @@
+name: 🪄 Transform
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  transform:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Transform
+        uses: Design-System-Pro/transform-action@v1.0.2
+        with:
+          output-path: "packages/alpha"
+          token-path: "packages/generator/tokens"
+
+      - name: Release
+        uses: Design-System-Pro/release-action@v1.0.1
+        with:
+          dist-dir: "packages/alpha"
