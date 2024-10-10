@@ -1,0 +1,21 @@
+name: 🪄 Transform
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  transform:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Transform
+        uses: Design-System-Pro/transform-action@v1.0.0
